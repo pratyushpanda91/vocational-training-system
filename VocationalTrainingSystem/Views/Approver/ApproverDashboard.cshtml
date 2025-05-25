@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = "Approver Dashboard";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f7fa;
+            margin: 0;
+        }
+
+        .approver-dashboard {
+            padding: 40px 10%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .tabs {
+            text-align: center;
+            margin: 30px 0 20px;
+        }
+
+        .tab-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 25px;
+            margin: 5px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .tab-btn.active {
+            background-color: #2c3e50;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .user-card {
+            background: #fdfdfd;
+            border-left: 5px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn {
+            padding: 10px 16px;
+            margin: 5px 5px 0 0;
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .view-btn { background-color: #2980b9; }
+        .approve-btn { background-color: #2ecc71; }
+        .reject-btn { background-color: #e74c3c; }
+        .credential-btn { background-color: #8e44ad; }
+        .update-btn { background-color: #f39c12; }
+
+        select {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+
+            .tab-btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .user-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+</head>
+
+<body>
+    <div class="approver-dashboard">
+        <h2>Approver Dashboard</h2>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab(event, 'pending')">Pending Applications</button>
+            <button class="tab-btn" onclick="showTab(event, 'approved')">Approved Applications</button>
+        </div>
+
+        <div id="pending" class="tab-content active">
+            <h3>Pending Applications</h3>
+            <div class="user-card">
+                <h4>John Doe (john@example.com)</h4>
+                <p><strong>Status:</strong> Pending</p>
+                <a href="/Approver/View/1" class="btn view-btn">View Profile</a>
+                <a href="/Approver/Documents/1" class="btn view-btn">View Documents</a>
+                <form method="post" action="/Approver/ApproveReject" class="action-form">
+                    <input type="hidden" name="UserId" value="1" />
+                    <button name="action" value="Approve" class="btn approve-btn">Approve</button>
+                    <button name="action" value="Reject" class="btn reject-btn">Reject</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="approved" class="tab-content">
+            <h3>Approved Applications</h3>
+            <div class="user-card">
+                <h4>Jane Smith (jane@example.com)</h4>
+                <p><strong>Status:</strong> Approved</p>
+                <a href="/Approver/View/2" class="btn view-btn">View Profile</a>
+                <form method="post" action="/Approver/GenerateCredential" class="action-form">
+                    <input type="hidden" name="UserId" value="2" />
+                    <button class="btn credential-btn">Generate Credential</button>
+                </form>
+                <form method="post" action="/Approver/UpdateStatus" class="status-form">
+                    <input type="hidden" name="UserId" value="2" />
+                    <select name="NewStatus" required>
+                        <option value="">Update Status</option>
+                        <option value="In Training">In Training</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <button class="btn update-btn">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(event, tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

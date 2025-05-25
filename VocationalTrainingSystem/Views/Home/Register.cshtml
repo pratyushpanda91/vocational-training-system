@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .register-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+            animation: fadeIn 1s ease;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="file"],
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .submit-btn {
+            grid-column: 1 / -1;
+            background: #2575fc;
+            color: white;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #1a5ed9;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+       
+        
+    </style>
+</head>
+<body>
+    <div class="register-card">
+        <h2>Register</h2>
+
+        <form id="registerForm" method="post" action="/Account/Register" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="FullName" required />
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="Email" required />
+            </div>
+
+            <div class="form-group">
+                <label>Father's Name</label>
+                <input type="text" name="FatherName" required />
+            </div>
+
+            <div class="form-group">
+                <label>Mother's Name</label>
+                <input type="text" name="MotherName" required />
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" name="DOB" required />
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="Gender" value="Male" required /> Male</label>
+                    <label><input type="radio" name="Gender" value="Female" /> Female</label>
+                    <label><input type="radio" name="Gender" value="Other" /> Other</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Role</label>
+                <select name="Role" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Approver">Approver</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Aadhar Number</label>
+                <input type="text" name="AadharNumber" maxlength="12" required />
+            </div>
+
+            <div class="form-group">
+                <label>Upload Aadhar Card (PDF)</label>
+                <input type="file" name="AadharCardFile" accept=".pdf" required />
+            </div>
+
+            <div class="form-group full-width">
+                <label>Address</label>
+                <textarea name="Address" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Qualification</label>
+                <input type="text" name="Qualification" required />
+            </div>
+
+            <div class="form-group">
+                <label>Photo ID Proof (JPG/PNG/PDF)</label>
+                <input type="file" name="PhotoID" accept=".jpg,.jpeg,.png,.pdf" required />
+            </div>
+
+            <div id="errorMsg" class="error"></div>
+
+            <button type="submit" class="submit-btn">Submit Registration</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function (e) {
+            const errorMsg = document.getElementById("errorMsg");
+
+            const aadharFile = document.querySelector("input[name='AadharCardFile']").files[0];
+            const photoIDFile = document.querySelector("input[name='PhotoID']").files[0];
+
+            if (aadharFile && aadharFile.type !== "application/pdf") {
+                e.preventDefault();
+                errorMsg.textContent = "Aadhar card must be a PDF file.";
+                return;
+            }
+
+            const validPhotoTypes = ["image/jpeg", "image/png", "application/pdf"];
+            if (photoIDFile && !validPhotoTypes.includes(photoIDFile.type)) {
+                e.preventDefault();
+                errorMsg.textContent = "Photo ID must be JPG, PNG, or PDF.";
+                return;
+            }
+
+            errorMsg.textContent = "";
+        });
+    </script>
+</body>
+</html>

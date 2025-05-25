@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #007acc, #00c6ff);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .login-wrapper {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .login-card {
+            background-color: #fff;
+            padding: 40px 35px;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            margin-bottom: 10px;
+            font-size: 26px;
+            color: #2c3e50;
+        }
+
+        .login-card p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #007acc;
+            box-shadow: 0 0 6px rgba(0, 122, 204, 0.3);
+            outline: none;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 8px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007acc;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #005eaa;
+            transform: translateY(-2px);
+        }
+
+        .register-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .register-text a {
+            color: #007acc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 20px;
+            animation: shake 0.3s ease-in-out;
+        }
+
+            .radio-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h2>Welcome Back</h2>
+            <p>Please log in to your account</p>
+
+            <form id="loginForm" method="post" action="/Account/Login">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="Email" required placeholder="Enter your email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="Password" required placeholder="Enter your password" />
+                </div>
+
+                <div class="form-group">
+                    <label>Select Role:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Role" value="User" required /> User</label>
+                        <label><input type="radio" name="Role" value="Admin" /> Admin</label>
+                        <label><input type="radio" name="Role" value="Approver" /> Approver</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn login-btn">Login</button>
+            </form>
+
+            <div class="register-text">
+                Don't have an account? <a asp-controller="Home" asp-action="Register">Register here</a>
+            </div>
+
+            <div id="error" class="error-message">@ViewBag.Error</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const roleChecked = document.querySelector('input[name="Role"]:checked');
+
+            const errorDiv = document.getElementById("error");
+
+            if (!email || !password || !roleChecked) {
+                e.preventDefault();
+                errorDiv.textContent = "Please fill all fields and select a role.";
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.textContent = "";
+                errorDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
