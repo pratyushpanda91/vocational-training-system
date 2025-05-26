@@ -8,5 +8,9 @@ namespace WebApplication4.Controllers
         {
             return View();
         }
+        public IActionResult AddUserProfile()
+        {
+            return View();
+        }
     }
 }
