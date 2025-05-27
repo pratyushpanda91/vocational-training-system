@@ -4,221 +4,300 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Add User Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* background: linear-gradient(to right, #dfe9f3, #ffffff); */
+            background-color: #f2f5f9;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
-        .register-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 35px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-            max-width: 700px;
+        .container {
             width: 100%;
-            animation: fadeIn 1s ease;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
         }
 
-        h2 {
+        .form-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease;
+        }
+
+        h1, h2 {
+            /* text-align: center; */
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333;
+            color: #2c3e50;
         }
 
-        form {
+        .form-grid, .address-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 20px;
+            margin-bottom: 20px;
         }
+
+        .form-grid {
+            grid-template-columns: repeat(2, 1fr);
+            .form-actions
+
+        {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        }
+
+        .address-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+
 
         .form-group {
             display: flex;
             flex-direction: column;
         }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
+            .form-group label {
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: #2d3436;
+            }
 
-        label {
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="date"],
-        input[type="file"],
-        select,
-        textarea {
-            padding: 10px;
+        input, select {
+            padding: 12px 15px;
+            border-radius: 8px;
             border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
+            font-size: 16px;
+            transition: border 0.3s, box-shadow 0.3s;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: #2575fc;
-            outline: none;
-        }
-
-        textarea {
-            resize: vertical;
-        }
+            input:focus, select:focus {
+                border-color: #27ae60;
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+            }
 
         .radio-group {
             display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+            .radio-group label {
+                font-weight: 400;
+            }
+
+        .form-actions {
+            display: flex;
+            flex-direction: column;
             gap: 15px;
-            align-items: center;
+            margin-top: 30px;
         }
 
-        .submit-btn {
-            grid-column: 1 / -1;
-            background: #2575fc;
-            color: white;
-            padding: 14px;
+        .cancel-btn, .continue-btn {
+            padding: 14px 20px;
             font-size: 16px;
-            border: none;
             border-radius: 8px;
+            border: none;
             cursor: pointer;
-            transition: background 0.3s ease;
+            font-weight: 600;
+            width: 100%;
+            transition: background 0.3s, transform 0.2s;
         }
 
-        .submit-btn:hover {
-            background: #1a5ed9;
+        .cancel-btn {
+            background-color: #f1f1f1;
+            color: #555;
         }
 
-        .error {
-            color: red;
-            font-weight: bold;
-            margin-top: 10px;
+            .cancel-btn:hover {
+                background-color: #e0e0e0;
+            }
+
+        .continue-btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+            .continue-btn:hover {
+                background-color: #2c3e50;
+                transform: translateY(-2px);
+            }
+
+        .form-footer {
             text-align: center;
-            grid-column: 1 / -1;
+            margin-top: 25px;
+            font-size: 15px;
+            color: #555;
         }
 
-       
-        
+            .form-footer a {
+                color: #2980b9;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .form-footer a:hover {
+                    color: #1a1aff;
+                    text-decoration: underline;
+                }
     </style>
 </head>
 <body>
-    <div class="register-card">
-        <h2>Add User Profile</h2>
+    <div class="container">
+        <form id="registrationForm" class="form-card">
+            <h1>Add User Details</h1>
 
-        <form id="registerForm" method="post" action="/Account/Register" enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" name="FullName" required />
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="Email" required />
-            </div>
-
-            <div class="form-group">
-                <label>Father's Name</label>
-                <input type="text" name="FatherName" required />
-            </div>
-
-            <div class="form-group">
-                <label>Mother's Name</label>
-                <input type="text" name="MotherName" required />
-            </div>
-
-            <div class="form-group">
-                <label>Date of Birth</label>
-                <input type="date" name="DOB" required />
-            </div>
-
-            <div class="form-group">
-                <label>Gender</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="Gender" value="Male" required /> Male</label>
-                    <label><input type="radio" name="Gender" value="Female" /> Female</label>
-                    <label><input type="radio" name="Gender" value="Other" /> Other</label>
+            <h2>Personal Information</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>User Name *</label>
+                    <input type="text" required />
+                </div>
+                <div class="form-group">
+                    <label>Father's Name *</label>
+                    <input type="text" required />
+                </div>
+                <div class="form-group">
+                    <label>Mother's Name *</label>
+                    <input type="text" required />
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" required />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Gmail *</label>
+                    <input type="email" required />
+                </div>
+                <div class="form-group">
+                    <label>Aadhar Number *</label>
+                    <input type="text" required />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> DOB *</label>
+                    <input type="date" required />
                 </div>
             </div>
 
+            <h2>Present Address *</h2>
+            <div class="address-grid present-address">
+                <input type="text" placeholder="At" required />
+                <input type="text" placeholder="Post" required />
+                <input type="text" placeholder="Dist" required />
+                <input type="text" placeholder="Town/City" required />
+                <input type="text" placeholder="State" required />
+                <input type="text" placeholder="Country" required />
+                <input type="number" placeholder="PIN" required />
+            </div>
             <div class="form-group">
-                <label>Role</label>
-                <select name="Role" required>
-                    <option value="">-- Select Role --</option>
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Approver">Approver</option>
-                </select>
+                <label><input type="checkbox" id="sameAsPresent" /> Same as Present Address</label>
             </div>
 
-            <div class="form-group">
-                <label>Aadhar Number</label>
-                <input type="text" name="AadharNumber" maxlength="12" required />
+            <h2>Permanent Address *</h2>
+            <div class="address-grid permanent-address">
+                <input type="text" placeholder="At" required />
+                <input type="text" placeholder="Post" required />
+                <input type="text" placeholder="Dist" required />
+                <input type="text" placeholder="Town/City" required />
+                <input type="text" placeholder="State" required />
+                <input type="text" placeholder="Country" required />
+                <input type="number" placeholder="PIN" required />
             </div>
 
-            <div class="form-group">
-                <label>Upload Aadhar Card (PDF)</label>
-                <input type="file" name="AadharCardFile" accept=".pdf" required />
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Identification Type *</label>
+                    <select required>
+                        <option value="">Select</option>
+                        <option value="Aadhar">Aadhar</option>
+                        <option value="PAN">PAN</option>
+                        <option value="Voter ID">Voter ID</option>
+                        <option value="Passport">Passport</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Qualification *</label>
+                    <select required>
+                        <option value="">Select</option>
+                        <option value="10th">10th</option>
+                        <option value="12th">12th</option>
+                        <option value="Graduate">Graduate</option>
+                        <option value="Post-Graduate">Post-Graduate</option>
+                        <option value="Diploma">Diploma</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="form-group full-width">
-                <label>Address</label>
-                <textarea name="Address" rows="3" required></textarea>
+            <h2>Qualification Details *</h2>
+            <div class="address-grid">
+                <input type="text" placeholder="ID" required />
+                <input type="text" placeholder="College" required />
+                <input type="text" placeholder="Course" required />
+                <input type="text" placeholder="Regd no" required />
+                <input type="text" placeholder="Marks/Cgpa" required />
+                <input type="number" placeholder="Passing Year" required />
             </div>
 
-            <div class="form-group">
-                <label>Qualification</label>
-                <input type="text" name="Qualification" required />
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Gender *</label>
+                    <select required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Photo ID Proof *</label>
+                    <input type="file" required />
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Photo ID Proof (JPG/PNG/PDF)</label>
-                <input type="file" name="PhotoID" accept=".jpg,.jpeg,.png,.pdf" required />
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" onclick="window.location.reload()">Cancel</button>
+                <button type="submit" class="continue-btn">Add →</button>
             </div>
-
-            <div id="errorMsg" class="error"></div>
-
-            <button type="submit" class="submit-btn">Submit Profile</button>
         </form>
     </div>
-
     <script>
-        document.getElementById("registerForm").addEventListener("submit", function (e) {
-            const errorMsg = document.getElementById("errorMsg");
-
-            const aadharFile = document.querySelector("input[name='AadharCardFile']").files[0];
-            const photoIDFile = document.querySelector("input[name='PhotoID']").files[0];
-
-            if (aadharFile && aadharFile.type !== "application/pdf") {
-                e.preventDefault();
-                errorMsg.textContent = "Aadhar card must be a PDF file.";
-                return;
-            }
-
-            const validPhotoTypes = ["image/jpeg", "image/png", "application/pdf"];
-            if (photoIDFile && !validPhotoTypes.includes(photoIDFile.type)) {
-                e.preventDefault();
-                errorMsg.textContent = "Photo ID must be JPG, PNG, or PDF.";
-                return;
-            }
-
-            errorMsg.textContent = "";
+        document.getElementById("registrationForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Form submitted successfully!");
         });
     </script>
 </body>
 </html>
+
