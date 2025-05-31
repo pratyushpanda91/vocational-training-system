@@ -1,8 +1,71 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome | Vocational Training DBMS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0055A4, #25ebba);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    img.logo {
+      width: 225px;
+      height: 225px;
+      margin-bottom: 15px;
+
+      
+    }
+
+    h1{
+      font-size: 2.5rem;
+      text-align: center;
+    }
+    .content{
+        display:flex;
+        flex-direction: column;
+       
+       
+    }
+
+    a.login-button {
+      margin-top:12px;
+      padding: 12px 24px;
+      background-color: #f69a11;
+      color: #000f95;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    a.login-button:hover {
+      background-color: #000000;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="~/images/drdo.png" alt="DRDO Logo" class="logo" />
+  <div class="content">
+   <h1>Welcome to</h1>
+  <h1>Vocational Trainee Management System</h1>
 </div>
+  <a asp-controller="Home" asp-action="Login" class="login-button">Login</a>
+
+</body>
+</html>
