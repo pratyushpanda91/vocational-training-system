@@ -1,0 +1,50 @@
+﻿@model VocationalTrainingSystem.ViewModels.UserProfileViewModel
+
+<div class="container mt-4">
+    <div class="card shadow rounded">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">User Registration Details</h3>
+            <a asp-controller="Admin" asp-action="AdminDashboard" class="btn btn-light text-primary">
+                ← Back to Dashboard
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>User Name:</strong> @Model.UserName</div>
+                <div class="col-md-6"><strong>Father Name:</strong> @Model.FatherName</div>
+                <div class="col-md-6"><strong>Mother Name:</strong> @Model.MotherName</div>
+                <div class="col-md-6"><strong>Phone Number:</strong> @Model.PhoneNumber</div>
+                <div class="col-md-6"><strong>Email:</strong> @Model.Gmail</div>
+                <div class="col-md-6"><strong>Aadhar Number:</strong> @Model.AadharNumber</div>
+                <div class="col-md-6"><strong>Date of Birth:</strong> @Model.DOB.ToString("dd-MM-yyyy")</div>
+                <div class="col-md-6"><strong>Identification Type:</strong> @Model.IdentificationType</div>
+                <div class="col-md-6"><strong>Qualification:</strong> @Model.Qualification</div>
+                <div class="col-md-6"><strong>College:</strong> @Model.College</div>
+                <div class="col-md-6"><strong>Course:</strong> @Model.Course</div>
+                <div class="col-md-6"><strong>Reg. No.:</strong> @Model.RegdNo</div>
+                <div class="col-md-6"><strong>Marks/CGPA:</strong> @Model.MarksOrCgpa</div>
+                <div class="col-md-6"><strong>Passing Year:</strong> @Model.PassingYear</div>
+            </div>
+
+            <h5 class="text-secondary mt-4">Present Address</h5>
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>At:</strong> @Model.PresentAt</div>
+                <div class="col-md-6"><strong>PO:</strong> @Model.PresentPost</div>
+                <div class="col-md-6"><strong>District:</strong> @Model.PresentDist</div>
+                <div class="col-md-6"><strong>State:</strong> @Model.PresentState</div>
+                <div class="col-md-6"><strong>Country:</strong> @Model.PresentCountry</div>
+                <div class="col-md-6"><strong>Pincode:</strong> @Model.PresentPIN</div>
+            </div>
+
+            <h5 class="text-secondary mt-4">Permanent Address</h5>
+            <div class="row">
+                <div class="col-md-6"><strong>At:</strong> @Model.PermanentAt</div>
+                <div class="col-md-6"><strong>PO:</strong> @Model.PermanentPost</div>
+                <div class="col-md-6"><strong>District:</strong> @Model.PermanentDist</div>
+                <div class="col-md-6"><strong>State:</strong> @Model.PermanentState</div>
+                <div class="col-md-6"><strong>Country:</strong> @Model.PermanentCountry</div>
+                <div class="col-md-6"><strong>Pincode:</strong> @Model.PermanentPIN</div>
+            </div>
+        </div>
+    </div>
+</div>

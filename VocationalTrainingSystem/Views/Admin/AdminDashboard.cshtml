@@ -223,9 +223,9 @@
                     </form>
                 </td>
                 <td>
-                    <a class="btn view-btn" href="/Admin/View/1" title="View Profile">View</a>
-                    <a class="btn edit-btn" href="/Admin/Edit/1" title="Edit User">Edit</a>
-                    <a class="btn delete-btn" href="/Admin/Delete/1" title="Delete User" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                    <a class="btn view-btn" href="/Admin/ViewInfo/@user.UserID" title="View Profile">View</a>
+                            <a class="btn edit-btn" href="/Admin/EditInfo/@user.UserID" title="Edit User">Edit</a>
+                    <a class="btn delete-btn" href="/Admin/Delete/@user.UserID" title="Delete User" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                 </td>
             </tr>
             }

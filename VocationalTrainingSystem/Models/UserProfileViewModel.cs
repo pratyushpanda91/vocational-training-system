@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VocationalTrainingSystem.ViewModels
 {
     public class UserProfileViewModel
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int UserId { get; set; }
         // UserDetails
         public string UserName { get; set; }
         public string FatherName { get; set; }
